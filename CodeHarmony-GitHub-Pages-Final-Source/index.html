@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="#070707"/>
+  <meta name="description" content="CodeHarmony — Write code. Hear the composition."/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/src/styles/app.css"/>
+  <title>CodeHarmony — Code, composed.</title>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <nav aria-label="Main navigation">
+      <button id="nav-examples" class="nav-button">Examples</button>
+      <button id="nav-about" class="nav-button">About</button>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero" aria-label="CodeHarmony introduction">
+      <div class="hero-copy">
+        <div class="hero-kicker"><span class="hero-dash"></span> THE ART OF ALGORITHMS</div>
+        <h1>Code, <span>composed.</span></h1>
+        <p>Your code already has a rhythm.<br class="hero-break"/> Now hear what it sounds like.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-art-frame">
+          <svg viewBox="0 0 360 220" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="metal" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff"/><stop offset=".48" stop-color="#aaa"/><stop offset="1" stop-color="#4a4a4a"/></linearGradient></defs>
+            <circle cx="180" cy="110" r="99" stroke="white" stroke-opacity=".08"/>
+            <circle cx="180" cy="110" r="78" stroke="white" stroke-opacity=".13"/>
+            <circle cx="180" cy="110" r="56" stroke="white" stroke-opacity=".17"/>
+            <circle cx="180" cy="110" r="32" stroke="white" stroke-opacity=".22"/>
+            <path d="M26 110H91 M269 110H334" stroke="white" stroke-opacity=".18"/>
+            <g stroke="url(#metal)" stroke-width="3" stroke-linecap="round">
+              <path d="M91 103v14M104 85v50M117 95v30M130 64v92M143 82v56M156 38v144M169 67v86M182 26v168M195 52v116M208 75v70M221 49v122M234 83v54M247 91v38M260 104v12"/>
+            </g>
+            <circle cx="180" cy="110" r="99" stroke="white" stroke-opacity=".08" stroke-dasharray="2 12" stroke-width="3"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="workbench" aria-label="Code and music workspace">
+      <div class="workbench-bar"><span class="workbench-title">THE WORKBENCH</span><span class="workbench-right"><span class="alive-dot"></span> IN YOUR BROWSER</span></div>
+      <section class="workspace" aria-label="Code editor and music generator">
+        <div class="panel editor-panel">
+          <div class="panel-head"><div class="panel-heading"><span class="panel-number">01</span><h2>Source code</h2></div><span class="head-aux">⌘ ENTER TO COMPOSE</span></div>
+          <div class="toolbar">
+            <label class="select-wrap">Language
+              <select id="language"><option value="python">Python</option><option value="javascript">JavaScript</option><option value="typescript">TypeScript</option><option value="c">C</option><option value="cpp">C++</option><option value="java">Java</option></select>
+            </label>
+            <label class="select-wrap">Example
+              <select id="example"><option value="fibonacci">Fibonacci</option><option value="bubble">Bubble Sort</option><option value="binary">Binary Search</option><option value="dfs">Depth First Search</option><option value="nested">Nested Loops</option><option value="factorial">Recursive Factorial</option></select>
+            </label>
+            <button id="clear-code" class="tiny-button" title="Clear the code editor">Clear</button>
+          </div>
+          <div class="editor-shell">
+            <div class="editor-topline"><span class="editor-file">main.py</span><span class="editor-file-type">SOURCE</span></div>
+            <div class="editor-body">
+              <div id="line-numbers" class="line-numbers" aria-hidden="true"></div>
+              <div class="editor-stage"><pre id="highlight-layer" class="highlight-layer" aria-hidden="true"></pre><textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" aria-label="Source code editor"></textarea></div>
+            </div>
+          </div>
+          <div class="editor-footer"><span id="editor-stats">0 LINES · 0 CHARS</span></div>
+          <div class="generate-row"><button id="generate" class="primary-button">Compose music <span class="button-arrow" aria-hidden="true">→</span></button><button id="regenerate" class="secondary-button" title="Generate a new variation of the same code" disabled>New variation</button></div>
+          <div id="status" class="inline-status" role="status" aria-live="polite">Enter code, then compose a track.</div>
+        </div>
+
+        <div class="panel studio-panel">
+          <div class="panel-head"><div class="panel-heading"><span class="panel-number">02</span><h2>Sound studio</h2></div><span id="render-badge" class="output-badge">READY</span></div>
+          <div class="music-top">
+            <div class="cover-art" aria-hidden="true"><div class="disc-outer"></div><div class="disc-middle"></div><div class="disc-inner"></div><div class="disc-center"></div></div>
+            <div class="track-meta"><div class="meta-tag">CURRENT COMPOSITION</div><h3 id="song-title">Untitled Algorithm</h3><div id="song-subtitle">Generate a sound from code</div><div class="track-chips"><span id="track-key">KEY —</span><span id="track-scale">SCALE —</span></div></div>
+          </div>
+          <div class="viz-wrap"><div class="viz-label"><span>OSCILLOSCOPE</span><span class="viz-ends">L — R</span></div><canvas id="visualizer" role="img" aria-label="Live audio frequency visualizer"></canvas></div>
+          <div class="progress-wrap"><div id="progress" class="progress" role="slider" tabindex="0" aria-label="Playback position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-fill" class="progress-fill"></div><div id="progress-thumb" class="progress-thumb"></div></div><div class="time-row"><span id="current-time">0:00</span><span id="total-time">0:00</span></div></div>
+          <div class="transport"><div class="transport-actions"><button id="back-to-start" class="control-button" aria-label="Restart from the beginning" title="Restart from the beginning">Reset</button><button id="stop" class="control-button" aria-label="Stop playback" title="Stop playback">Stop</button><button id="play" class="play-button" aria-label="Play audio" disabled>Play</button><button id="forward" class="control-button" aria-label="Skip forward 15 seconds" title="Skip forward 15 seconds">+15s</button></div><div class="volume-control"><label for="volume">Volume</label><input id="volume" aria-label="Master volume" type="range" min="0" max="100" value="75"/></div></div>
+          <div class="settings-grid"><label>Genre<select id="genre"><option value="lofi">Lo-fi</option><option value="edm">EDM</option><option value="ambient">Ambient</option><option value="synthwave">Synthwave</option><option value="chiptune">Chiptune</option></select></label><label>Tempo<span class="inline-value" id="bpm-label">AUTO</span><input id="bpm" type="range" min="0" max="160" value="0"/></label><label>Length<select id="bars"><option value="auto">Auto</option><option value="8">8 bars</option><option value="16">16 bars</option><option value="32">32 bars</option></select></label><label>Mood<select id="mood"><option value="auto">Auto</option><option value="calm">Calm</option><option value="bright">Bright</option><option value="dark">Dark</option><option value="energetic">Energetic</option></select></label></div>
+          <button id="export" class="export-button" disabled><span>Download WAV</span><span aria-hidden="true">↓</span></button>
+        </div>
+      </section>
+    </section>
+
+    <section class="insights" aria-label="Code analysis and mixer"><div class="section-head"><h2>Inside the composition<span>.</span></h2></div><div class="insights-grid"><article class="insight-card"><div class="insight-title"><h3>Code DNA</h3></div><div class="dna-list" id="dna-list"></div><div id="analysis-details" class="analysis-details"></div></article><article class="insight-card"><div class="insight-title"><h3>Instrument mixer</h3></div><div id="mixer" class="mixer"></div></article><article class="insight-card mapping-card"><div class="insight-title"><h3>Code → Music</h3></div><div id="mapping" class="mapping"></div><div class="fingerprint"><span>FINGERPRINT</span><code id="fingerprint">—</code></div></article></div></section>
+    <section class="piano-panel" aria-label="Piano roll timeline"><div class="piano-header"><h2>Piano roll</h2><span id="piano-label">WAITING</span></div><canvas id="piano" role="img" aria-label="Piano roll showing generated notes over time"></canvas></section>
+  </main>
+
+  <footer><span class="footer-brand">codeharmony<span>.</span></span><button id="footer-about">How it works</button></footer>
+</div>
+<dialog id="about-dialog"><form method="dialog"><button class="dialog-close" aria-label="Close">×</button><h2>Code into sound.</h2><p>CodeHarmony analyzes source code without executing it. Loops influence rhythm, branches shape melodic variations, functions organize phrases, and recursion creates evolving motifs.</p><p>All audio is synthesized locally with the Web Audio API. Playback and WAV export use the same score. No account, server, or API key is required.</p><button class="primary-button dialog-okay">Close</button></form></dialog>
+<script type="module" src="/src/main.ts"></script>
+</body></html>
